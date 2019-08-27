@@ -81,6 +81,22 @@ class ErrorDocumentNotFound extends Error {
   }
 }
 
+class ErrorFieldNotFound extends Error {
+  constructor(fieldName = '', message= 'field not found') {
+    super(message);
+    this.fieldName = fieldName;
+    // can not use this.constructor.name:   it returns 'unexpected string'
+    this.type = 'ErrorFieldNotFound';
+  }
+  asBoom() {
+    let b = Boom.notFound(this.message);
+    b.output.payload.details =  {fieldName: this.fieldName};
+    return b;
+  }
+}
+
+
+
 class ErrorFieldNotValid extends Error {
   constructor(fieldname = '', message= 'data not valid') {
     super(message);
