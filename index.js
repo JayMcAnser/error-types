@@ -150,5 +150,6 @@ module.exports = {
   ErrorAccessDenied,
   ErrorFieldNotValid,
   ErrorDocumentNotFound,
+  ErrorFieldNotFound,
   ErrorFile
 };

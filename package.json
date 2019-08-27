@@ -1,6 +1,6 @@
 {
   "name": "error-types",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Error class definitions",
   "main": "index.js",
   "scripts": {
