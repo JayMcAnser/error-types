@@ -126,6 +126,16 @@ class ErrorFile extends Error {
   }
 }
 
+
+class ErrorFieldNotAllowed extends Error {
+  constructor(fields, message = false) {
+    super(message ? message : `field${fields.length > 1 ? 's' : ''} "${fields.join(', ')}" not defined`);
+    this.type = 'ErrorFieldNotAllowed';
+    this.fields = fields
+  }
+}
+
+
 function toBoomError(err, request) {
   if (err.asBoom) {
     return err.asBoom(request)
@@ -142,6 +152,8 @@ function toBoomError(err, request) {
     }
   }
 }
+
+
 module.exports = {
   toBoomError,
   ErrorNotImplemented,
@@ -151,5 +163,6 @@ module.exports = {
   ErrorFieldNotValid,
   ErrorDocumentNotFound,
   ErrorFieldNotFound,
+  ErrorFieldNotAllowed,
   ErrorFile
 };
