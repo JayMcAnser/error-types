@@ -148,7 +148,7 @@ class ErrorServerError extends Error {
   }
 }
 
-class ErrorUnknwon extends ErrorBase {
+class ErrorUnknown extends ErrorBase {
   constructor(message, status) {
     super(message, status);
     this.type = 'ErrorUnknown';
@@ -216,5 +216,6 @@ module.exports = {
   ErrorFieldNotAllowed,
   ErrorFile,
   ErrorBadRequest,
-  ErrorServerError
+  ErrorServerError,
+  ErrorUnknown
 };
