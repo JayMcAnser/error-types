@@ -5,9 +5,9 @@
 const Boom = require('@hapi/boom');
 
 class ErrorBase extends Error {
-  constructor(message) {
+  constructor(message, statusCode = 500) {
     super(message);
-    this.boomStatus = 500
+    this.boomStatus = statusCode
   }
   asBoom() {
     return new Boom.badData(this.message);
@@ -135,6 +135,48 @@ class ErrorFieldNotAllowed extends Error {
   }
 }
 
+class ErrorBadRequest extends Error {
+  constructor(message = false) {
+    super(message);
+    this.type = 'ErrorBadRequest';
+  }
+}
+class ErrorServerError extends Error {
+  constructor(message = false) {
+    super(message);
+    this.type = 'ErrorServerError';
+  }
+}
+
+class ErrorDataError extends ErrorBase {
+  constructor(message = 'data error', status) {
+    if (message instanceof Object) {
+      super('data error', status !== undefined ? status : 401);
+      this.errors = [];
+      this.add(message.type, message.fieldname, message.message);
+    } else {
+      super(message, 401);
+      this.errors = [];
+    }
+    this.name = 'ErrorDataError';
+  }
+
+  get length() {
+    return this.errors.length;
+  }
+  error(index) {
+    return this.errors[index];
+  }
+  add(type, fieldname, message, data) {
+    this.errors.push( {
+      type: type,
+      fieldname: fieldname,
+      message: message,
+      data: data
+    })
+  }
+}
+
 
 function toBoomError(err, request) {
   if (err.asBoom) {
@@ -164,5 +206,7 @@ module.exports = {
   ErrorDocumentNotFound,
   ErrorFieldNotFound,
   ErrorFieldNotAllowed,
-  ErrorFile
+  ErrorFile,
+  ErrorBadRequest,
+  ErrorServerError
 };
