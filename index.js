@@ -148,6 +148,14 @@ class ErrorServerError extends Error {
   }
 }
 
+class ErrorUnknwon extends ErrorBase {
+  constructor(message, status) {
+    super(message, status);
+    this.type = 'ErrorUnknown';
+  }
+}
+
+
 class ErrorDataError extends ErrorBase {
   constructor(message = 'data error', status) {
     if (message instanceof Object) {
