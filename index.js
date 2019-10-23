@@ -5,19 +5,19 @@
 const Boom = require('@hapi/boom');
 
 class ErrorBase extends Error {
-  constructor(message, statusCode = 500) {
+  constructor(message, status = 500) {
     super(message);
-    this.boomStatus = statusCode
+    this.boomStatus = status
   }
   asBoom() {
     return new Boom.badData(this.message);
   }
 }
 
-class ErrorNotImplemented extends Error {
+class ErrorNotImplemented extends ErrorBase {
   // https://javascript.info/custom-errors
-  constructor(message) {
-    super(message);
+  constructor(message, status) {
+    super(message, status);
     // can not use this.constructor.name:   it returns 'unexpected string'
     this.type = 'ErrorNotImplemented';
   }
@@ -26,8 +26,8 @@ class ErrorNotImplemented extends Error {
   }
 
 }
-class ErrorNotFound extends Error {
-  constructor(field = 'no name', message= 'not found') {
+class ErrorNotFound extends ErrorBase {
+  constructor(field = 'no name', message= 'not found', status) {
     super(message);
     // can not use this.constructor.name:   it returns 'unexpected string'
     this.type = 'ErrorNotFound';
@@ -40,9 +40,9 @@ class ErrorNotFound extends Error {
   }
 
 }
-class ErrorDuplicate extends Error {
-  constructor(fieldname = 'no name', message= 'duplicate') {
-    super(message);
+class ErrorDuplicate extends ErrorBase {
+  constructor(fieldname = 'no name', message= 'duplicate', status) {
+    super(message, status);
     // can not use this.constructor.name:   it returns 'unexpected string'
     this.type = 'ErrorDuplicate';
     this.fieldname = fieldname;
@@ -55,9 +55,9 @@ class ErrorDuplicate extends Error {
   }
 }
 
-class ErrorAccessDenied extends Error {
-  constructor(message= 'access denied') {
-    super(message);
+class ErrorAccessDenied extends ErrorBase {
+  constructor(message= 'access denied', status) {
+    super(message, status);
     // can not use this.constructor.name:   it returns 'unexpected string'
     this.type = 'ErrorAccessDenied';
   }
@@ -67,9 +67,9 @@ class ErrorAccessDenied extends Error {
   }
 }
 
-class ErrorDocumentNotFound extends Error {
-  constructor(document = '', message= 'document not found') {
-    super(message);
+class ErrorDocumentNotFound extends ErrorBase {
+  constructor(document = '', message= 'document not found', status) {
+    super(message, status);
     this.document = document;
     // can not use this.constructor.name:   it returns 'unexpected string'
     this.type = 'ErrorDocumentNotFound';
@@ -81,9 +81,9 @@ class ErrorDocumentNotFound extends Error {
   }
 }
 
-class ErrorFieldNotFound extends Error {
-  constructor(fieldName = '', message= 'field not found') {
-    super(message);
+class ErrorFieldNotFound extends ErrorBase {
+  constructor(fieldName = '', message= 'field not found', status) {
+    super(message, status);
     this.fieldName = fieldName;
     // can not use this.constructor.name:   it returns 'unexpected string'
     this.type = 'ErrorFieldNotFound';
@@ -97,9 +97,9 @@ class ErrorFieldNotFound extends Error {
 
 
 
-class ErrorFieldNotValid extends Error {
-  constructor(fieldname = '', message= 'data not valid') {
-    super(message);
+class ErrorFieldNotValid extends ErrorBase {
+  constructor(fieldname = '', message= 'data not valid', status) {
+    super(message, status);
     this.fieldname = fieldname;
     // can not use this.constructor.name:   it returns 'unexpected string'
     this.type = 'ErrorFieldNotValid';
@@ -111,9 +111,9 @@ class ErrorFieldNotValid extends Error {
   }
 
 }
-class ErrorFile extends Error {
-  constructor(filename= '', message= 'file error found') {
-    super(message);
+class ErrorFile extends ErrorBase {
+  constructor(filename= '', message= 'file error found', status) {
+    super(message, status);
     this.document = filename;
     // can not use this.constructor.name:   it returns 'unexpected string'
     this.type = 'ErrorFile';
@@ -127,23 +127,23 @@ class ErrorFile extends Error {
 }
 
 
-class ErrorFieldNotAllowed extends Error {
-  constructor(fields, message = false) {
-    super(message ? message : `field${fields.length > 1 ? 's' : ''} "${fields.join(', ')}" not defined`);
+class ErrorFieldNotAllowed extends ErrorBase {
+  constructor(fields, message = false, status) {
+    super(message ? message : `field${fields.length > 1 ? 's' : ''} "${fields.join(', ')}" not defined`, status);
     this.type = 'ErrorFieldNotAllowed';
     this.fields = fields
   }
 }
 
-class ErrorBadRequest extends Error {
-  constructor(message = false) {
-    super(message);
+class ErrorBadRequest extends ErrorBase {
+  constructor(message, status) {
+    super(message, status);
     this.type = 'ErrorBadRequest';
   }
 }
-class ErrorServerError extends Error {
-  constructor(message = false) {
-    super(message);
+class ErrorServerError extends ErrorBase {
+  constructor(message, status) {
+    super(message, status);
     this.type = 'ErrorServerError';
   }
 }
