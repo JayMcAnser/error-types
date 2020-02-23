@@ -10,7 +10,7 @@ class ErrorBase extends Error {
     this.boomStatus = status
   }
   asBoom() {
-    return new Boom.badData(this.message);
+    return Boom.badData(this.message);
   }
 }
 
@@ -22,7 +22,7 @@ class ErrorNotImplemented extends ErrorBase {
     this.type = 'ErrorNotImplemented';
   }
   asBoom() {
-    return new Boom.notImplemented(this.message);
+    return Boom.notImplemented(this.message);
   }
 
 }
