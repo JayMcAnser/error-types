@@ -206,6 +206,7 @@ function toBoomError(err, request) {
 
 module.exports = {
   toBoomError,
+  ErrorBase,
   ErrorNotImplemented,
   ErrorNotFound,
   ErrorDuplicate,
