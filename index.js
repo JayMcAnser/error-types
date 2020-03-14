@@ -82,7 +82,10 @@ class ErrorDocumentNotFound extends ErrorBase {
 }
 
 class ErrorFieldNotFound extends ErrorBase {
-  constructor(fieldName = '', message= 'field not found', status) {
+  constructor(fieldName = '', message, status) {
+    if (message === undefined) {
+      message = `field (${fieldName} was not found`;
+    }
     super(message, status);
     this.fieldName = fieldName;
     // can not use this.constructor.name:   it returns 'unexpected string'
