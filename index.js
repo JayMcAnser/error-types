@@ -84,7 +84,7 @@ class ErrorDocumentNotFound extends ErrorBase {
 class ErrorFieldNotFound extends ErrorBase {
   constructor(fieldName = '', message, status) {
     if (message === undefined) {
-      message = `field (${fieldName} was not found`;
+      message = `field (${fieldName}) was not found`;
     }
     super(message, status);
     this.fieldName = fieldName;
