@@ -1,13 +1,13 @@
 {
   "name": "error-types",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Error class definitions",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Jaap van der Kreeft",
+  "author": "Jay McAnser",
   "license": "MIT",
   "dependencies": {
     "@hapi/boom": "^7.4.3"

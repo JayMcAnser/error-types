@@ -24,6 +24,21 @@ class ErrorNotImplemented extends ErrorBase {
   asBoom() {
     return Boom.notImplemented(this.message);
   }
+}
+
+/**
+ * an error of which the type can be set
+ * Boom is the forbidden error
+ */
+class ErrorTyped extends ErrorBase {
+  constructor(type, message) {
+    super(message);
+    // can not use this.constructor.name:   it returns 'unexpected string'
+    this.type = type;
+  }
+  asBoom() {
+    return Boom.forbidden(this.message);
+  }
 
 }
 class ErrorNotFound extends ErrorBase {
