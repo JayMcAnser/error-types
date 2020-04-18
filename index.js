@@ -234,6 +234,7 @@ module.exports = {
   ErrorFieldNotFound,
   ErrorFieldNotAllowed,
   ErrorFile,
+  ErrorTyped,
   ErrorBadRequest,
   ErrorServerError,
   ErrorUnknown
