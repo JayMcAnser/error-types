@@ -117,8 +117,8 @@ class ErrorFieldNotFound extends ErrorBase {
 
 class ErrorFieldNotValid extends ErrorBase {
   constructor(fieldname = '', message= 'data not valid', status) {
-    super(message ? fieldname : message, status);
-    this.fieldname = message ? fieldname : '-- no field --';
+    super(message === false ? fieldname : message, status);
+    this.fieldname = message === false ? ' -- no field --' : fieldname;
     // can not use this.constructor.name:   it returns 'unexpected string'
     this.type = 'ErrorFieldNotValid';
   }
