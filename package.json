@@ -1,6 +1,6 @@
 {
   "name": "error-types",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Error class definitions",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,6 @@
   "author": "Jay McAnser",
   "license": "MIT",
   "dependencies": {
-    "@hapi/boom": "^7.4.3"
+    "@hapi/boom": "^9.1.0"
   }
 }
